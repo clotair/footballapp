@@ -4,7 +4,8 @@ import { CreateCompService } from 'src/app/competition/create-comp.service';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css']
+  styleUrls: ['./main.component.css'],
+
 })
 export class MainComponent implements OnInit {
   id 

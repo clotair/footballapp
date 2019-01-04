@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 Joueur = mongoose.model('Joueur');
 Equipe = mongoose.model('Equipe');
 Tournois = mongoose.model('Tournois');
+Match = mongoose.model('Match');
 
 
 exports.findAll = function(req, res){
@@ -140,6 +141,66 @@ exports.update = function(req, res) {
       console.log('localhost:3000->ressource Tournois not found')
       res.send({status:false,message:'NotFound'})
   });
+}
+exports.stat = function(req,res){
+  var id = req.params.id;
+  Match.find({},(err,matchs)=>{
+    if(err){
+      return res.send({status:null,message:err})
+    }
+    var myMacth = [];
+    var myMacthWin = [];
+    var myMacthLose = [];
+    var myMacthNull = [];
+    for(let i of matchs){
+      if(i.status == 'jouer'){
+        if(i.equipes[0].equipe == id ){
+
+          if(i.equipes[0].but<i.equipes[1].but){
+            Equipe.findOne({_id:i.equipes[1].equipe},(err,eqp)=>{
+              return myMacthLose.push({adversaire:eqp,butp:i.equipes[0].but,butc:i.equipes[1].but})
+            })
+            
+          }else if(i.equipes[0].but==i.equipes[1].but){
+            Equipe.findOne({_id:i.equipes[1].equipe},(err,eqp)=>{
+              return myMacthNull.push({adversaire:eqp,but:i.equipes[0].but})
+            })
+            
+          }else{
+            Equipe.findOne({_id:i.equipes[1].equipe},(err,eqp)=>{
+              return myMacthWin.push({adversaire:eqp,butp:i.equipes[0].but,butc:i.equipes[1].but})
+            })
+           
+          }
+        }else{
+          if( i.equipes[1].equipe == id){
+            if(i.equipes[1].but<i.equipes[0].but){
+              Equipe.findOne({_id:i.equipes[0].equipe},(err,eqp)=>{
+                return myMacthLose.push({adversaire:eqp,butp:i.equipes[1].but,butc:i.equipes[0].but})
+              })
+            }else if(i.equipes[1].but==i.equipes[0].but){
+              Equipe.findOne({_id:i.equipes[0].equipe},(err,eqp)=>{
+                return myMacthNull.push({adversaire:eqp,but:i.equipes[0].but})
+              })
+            
+            }else{
+              Equipe.findOne({_id:i.equipes[0].equipe},(err,eqp)=>{
+                return myMacthWin.push({adversaire:eqp,butp:i.equipes[1].but,butc:i.equipes[0].but})
+              })
+            }
+          }
+        }    
+      }
+      
+    }
+    Equipe.findOne({'_id':id},(err,info)=>{
+      if(err){
+        return res.send({stats:null,message:err})
+      }
+      return res.send({status:true,equipe:info,stats:{win:myMacthWin,lose:myMacthLose,null:myMacthNull}})
+    })
+    
+  })
 }
 exports.delete = function(req, res){
       //on verifie si le user est connecter

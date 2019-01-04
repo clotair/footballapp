@@ -31,10 +31,11 @@ db.on('error', function () {
   throw new Error('unable to connect to database at ' + mongoUri);
 });
 // supprimer la db
-/*db.dropDatabase('footappbase',function(err){
+/*
+db.dropDatabase('footappbase',function(err){
   console.log(err)
-})*/
-
+})
+*/
 
 // create express app
 var app = express()
@@ -120,7 +121,11 @@ app.get('/resultat',function(req,res){
   res.redirect('/')
 })
 app.get('/competition',function(req,res){
-  res.redirect('/')
+  if(typeof(req.session.auth) == 'undefined'){
+    res.redirect('/connexion');
+  }
+  
+  else res.redirect('/')
 })
 app.get('/classement',function(req,res){
   res.redirect('/')

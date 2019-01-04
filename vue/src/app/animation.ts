@@ -7,7 +7,7 @@ import {
 // Routable animations
 export const slideInAnimation =
   trigger('routeAnimation', [
-    transition('* => acceuil, inscription => connexion', [
+    transition('* => resultat,connexion => classement ,inscription => connexion', [
       style({ position: 'relative' }),
       query(':enter, :leave', [
         style({
@@ -34,7 +34,7 @@ export const slideInAnimation =
       ]),
       query(':enter', animateChild(), { optional: true }),
     ]),
-    transition('acceuil => *, connexion => inscription', [
+    transition('resultat => *,classement => connexion, connexion => inscription', [
         style({ position: 'relative' }),
         query(':enter, :leave', [
           style({
@@ -58,6 +58,33 @@ export const slideInAnimation =
           query(':enter', [
             animate('300ms ease-out', style({ right: '0%'}))
           ])
+        ]),
+        query(':enter', animateChild(), { optional: true }),
+      ]),
+      transition('* => poul,demi => quart ,finale => demi', [
+        style({ position: 'relative' }),
+        query(':enter, :leave', [
+          style({
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%'
+          })
+        ], { optional: true }),
+        /*query('@openClosed', [
+          animateChild()
+        ]),*/
+        query(':enter', [
+          style({ top: '-100%'})
+        ], { optional: true }),
+        query(':leave', animateChild(), { optional: true }),
+        group([
+          query(':leave', [
+            animate('300ms ease-out', style({ top: '100%'}))
+          ], { optional: true }),
+          query(':enter', [
+            animate('300ms ease-out', style({ top: '0%'}))
+          ], { optional: true })
         ]),
         query(':enter', animateChild(), { optional: true }),
       ]),

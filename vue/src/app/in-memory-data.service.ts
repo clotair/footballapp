@@ -14,7 +14,8 @@ export class InMemoryDataService implements InMemoryDbService {
     const matchs = [{id:null,matchs:null}];
     const equipes = [{id:null,equipe:null}];
     const matchEquipes = [{id:null,matchEquipes:null}];
- 
+    const equipe = [{id:null,stat:null}]
+
 
     // default returnType
     let returnType  = 'object';
@@ -36,7 +37,7 @@ export class InMemoryDataService implements InMemoryDbService {
       // 'returnType` can be 'object' | 'observable' | 'promise'
       returnType = body.returnType || 'object';
     }
-    const db = { poul, matchEquipes, equipes, matchs, status };
+    const db = {equipe, poul, matchEquipes, equipes, matchs, status };
 
     switch (returnType) {
       case ('observable'):

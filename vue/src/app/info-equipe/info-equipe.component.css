@@ -1,0 +1,69 @@
+.overl{
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 2200;
+    background-color: black;
+    opacity: 0.4;
+}
+.contain{
+    display: block;
+    position: absolute;
+    top:1%;
+    left: 10%;
+    z-index: 2201;
+    width: 80%;
+    padding-bottom: 30px;
+    background-color: #fff; 
+}
+header{
+    display: block;
+    height: 300px;
+}
+
+img{
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+a{
+    color: initial;
+    text-decoration: none;
+}
+.succes{
+    color: green;
+}
+.lose{
+    color: red;
+}
+.stats {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: block;
+    width: 80%;
+    margin: auto;
+    margin-top: 30px;
+    padding: 15px;
+    padding-bottom: 40px;
+}
+th {
+    border-bottom: 1px solid #DFE1E5;
+    color: rgba(0,0,0,.87);
+    font-size: 14px;
+    line-height: 14px;
+    height: 40px;
+    padding: 0;
+    padding-right: 0px;
+    vertical-align: middle;
+}
+tr {
+    height: 40px;
+}
+.table {
+    text-align: center;
+    width: 100%;
+    margin: auto;
+    border-collapse: separate;
+    border-spacing: 0;
+}

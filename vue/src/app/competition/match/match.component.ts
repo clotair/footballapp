@@ -20,7 +20,7 @@ export class MatchComponent implements OnInit {
   ngOnInit() {
     this.comp.matchEquipesProvide.subscribe((e)=>{
       if(e['id']!=this.idmacht)return false;
-      e= e ['matchEquipes']
+      e= e ['matchEquipe']
       if(e['status']){
         let t =[]
         t = e['message']

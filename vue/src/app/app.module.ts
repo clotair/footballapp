@@ -18,12 +18,14 @@ import { FooterComponent } from './footer/footer.component';
 import { ResultatModule } from './resultat/resultat.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { InfoEquipeComponent } from './info-equipe/info-equipe.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    InfoEquipeComponent,
     
   ],
   imports: [

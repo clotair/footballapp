@@ -34,7 +34,7 @@ export class EquipesComponent implements OnInit {
           
           reader.addEventListener('load', function() {
              
-              $('#prev img').attr('src',this.result);
+              $('#prev img').attr('src',this.result+'');
               
           });
   
@@ -107,12 +107,12 @@ export class EquipesComponent implements OnInit {
   add(){
     this.equipe.id = this._id;
     this.comp.set_equipe(this.equipe).subscribe((e)=>{
-      if([e['status']]){
+      if(e['status']){
         this.joueurs = []
         this.photo = ''
         this.equipe = {id:'',_id:'',nom:'',coach:'',represente:'',banniere:''};
         $('#prev img').attr('src','default.png');
-      }else if(e['status']==false){
+      }else {
         if(e['message']=='TeamComplete'){
           alert("nombre d'equipe complet")
         }

@@ -83,7 +83,7 @@ creerpoule=function(nom,valeur,equipes,id,event){
                             return false
                         }
                         updatepool(pl._id,id)
-                        creermatch(equipes,pl._id,event)
+                       return creermatch(equipes,pl._id,event)
                     })
             })
         })
@@ -123,14 +123,14 @@ creerpoule=function(nom,valeur,equipes,id,event){
                                 }
                             }
                         }
-                        Poule.create({tournois:id,nom:nom,niveau:valeur,
+                        return Poule.create({tournois:id,nom:nom,niveau:valeur,
                             classement:[{equipe:t[0]._id,nom:t[0].nom},{equipe:t[1]._id,nom:t[1].nom},{equipe:t[2]._id,nom:t[2].nom},{equipe:t[3]._id,nom:t[3].nom}]},(err,pl)=>{
                                 if(err){
                                     console.log(err)
                                     return false
                                 }
                                 creermatch(equipes,pl._id,event)
-                                updatepool(pl._id,id)
+                                return updatepool(pl._id,id)
                                 
                             })
                     })
@@ -144,38 +144,36 @@ creerpoule=function(nom,valeur,equipes,id,event){
 creermatch = function(equipes, id,event){
     
     if(equipes.length == 2){
-        Equipe.findOne({_id:equipes[0]},(err,eqp)=>{
+       return Equipe.findOne({_id:equipes[0]},(err,eqp)=>{
             if(err){
                 console.log(err)
                 return false
             }
-            Equipe.findOne({_id:equipes[1]},(err,eqp1)=>{
+           return Equipe.findOne({_id:equipes[1]},(err,eqp1)=>{
                 if(err){
                     console.log(err)
                     return false
                 }
-                Match.create({equipes:[{equipe:equipes[0],but:0,nom:eqp.nom},{equipe:equipes[1],but:0,nom:eqp1.nom}],status:'pasjouer',poule:id},(err, bien)=>{
+              return  Match.create({equipes:[{equipe:equipes[0],but:0,nom:eqp.nom},{equipe:equipes[1],but:0,nom:eqp1.nom}],status:'pasjouer',poule:id},(err, bien)=>{
                     if(err){
                         console.log(err)
                         return false
                     }
                     console.log('localhost:3000->match create',equipes[0],' ',equipes[1])
-                    event.emit('match')
+                    event.emit('match');
+                    return true
                   })
             })
         })
 
     }else {
         if(equipes.length==4){
-            creermatch([equipes[1],equipes[0]],id,event);
-            creermatch([equipes[1],equipes[2]],id,event);
-            creermatch([equipes[1],equipes[3]],id,event);
-            creermatch([equipes[2],equipes[0]],id,event);
-            creermatch([equipes[2],equipes[3]],id,event);
-            creermatch([equipes[0],equipes[3]],id,event);
-           
-            
-           
+           return creermatch([equipes[0],equipes[1]],id,event)
+            .then(creermatch([equipes[0],equipes[2]],id,event))
+            .then(creermatch([equipes[0],equipes[3]],id,event))
+            .then(creermatch([equipes[1],equipes[2]],id,event))
+            .then(creermatch([equipes[1],equipes[3]],id,event))
+            .then(creermatch([equipes[2],equipes[3]],id,event))
             
             
         }
@@ -289,10 +287,11 @@ exports.generate = function(req,res){
                     })
                 }
             })
-            creerpoule('GROUPE A',1,equipes.splice(0,4),req.body.id,event) 
-            creerpoule('GROUPE B',1,equipes.splice(0,4),req.body.id,event)
-            creerpoule('GROUPE C',1,equipes.splice(0,4),req.body.id,event)
-            creerpoule('GROUPE D',1,equipes.splice(0,4),req.body.id,event)
+            creerpoule('GROUPE A',1,equipes.splice(0,4),req.body.id,event)
+            .then(creerpoule('GROUPE B',1,equipes.splice(0,4),req.body.id,event)) 
+            .then(creerpoule('GROUPE C',1,equipes.splice(0,4),req.body.id,event))
+            .then(creerpoule('GROUPE D',1,equipes.splice(0,4),req.body.id,event))
+            
            
             
         }else{

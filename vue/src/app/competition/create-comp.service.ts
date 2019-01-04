@@ -33,6 +33,7 @@ export class CreateCompService {
   matchsProvide:Subject<any> = new Subject();
   equipesProvide:Subject<any> = new Subject();
   matchEquipesProvide:Subject<any> = new Subject();
+  statsEquipesProvide:Subject<any> = new Subject();
   constructor(
     private http: HttpClient
   ) { 
@@ -48,6 +49,7 @@ export class CreateCompService {
   set_joueur(joueur){
     return this.http.post('/joueur',joueur,httpOptions)
   }
+  
   set_equipe(equipe){
     return this.http.post('/equipe',equipe,httpOptions)
   }
@@ -95,25 +97,32 @@ export class CreateCompService {
         }
       }
       
-         this.http.post('/poule_all',{id:id},httpOptions).subscribe({
+         this.http.post('/poule_all',{id:id},httpOptions).pipe(catchError((err)=>{console.log(err) ;return of([])})).subscribe({
            next:(e)=>{
             if(e!=poul){
+              
               let tab = e['poules'];
-              let t1 = tab.map((val)=>{if(val.niveau==1)return val});
-              if(t1)this.poule1.next(t1);
-              let t2 = tab.map((val)=>{if(val.niveau==2)return val});
-              if(t2)this.poule2.next(t2);
-              let t3 = tab.map((val)=>{if(val.niveau==3)return val});
-              if(t3)this.poule3.next(t3);
-              let t4 = tab.map((val)=>{if(val.niveau==4)return val});
-              if(t4)this.poule4.next(t4);
-              this.http.put('api/poul',{id:0,poul:e}).subscribe()
+              if(tab){
+                let t1 = tab.map((val)=>{if(val.niveau==1)return val});
+                if(t1)this.poule1.next(t1);
+                let t2 = tab.map((val)=>{if(val.niveau==2)return val});
+                if(t2)this.poule2.next(t2);
+                let t3 = tab.map((val)=>{if(val.niveau==3)return val});
+                if(t3)this.poule3.next(t3);
+                let t4 = tab.map((val)=>{if(val.niveau==4)return val});
+                if(t4)this.poule4.next(t4);
+                this.http.put('api/poul',{id:0,poul:e}).subscribe()
+              }
+  
             }
   
         }
          })
     
-    })).subscribe()
+    })).subscribe({
+      next:()=>{},
+      error:()=>{return of([])}
+    })
     
   }
   get_match_poule(id){
@@ -123,7 +132,7 @@ export class CreateCompService {
           this.matchsProvide.next(match)
         }
     
-        this.http.get(`/match_poule/${id}`).pipe(catchError(()=>{return of(match['match'])})).subscribe({
+        this.http.get(`/match_poule/${id}`).pipe(catchError((err)=>{console.log(err) ;return of(match['match'])})).subscribe({
           next:(e)=>{
             if(match){
               if(e!=match['match']){
@@ -172,26 +181,33 @@ export class CreateCompService {
     id = id+'';
     this.http.get(`api/matchEquipes/${id}`).pipe(catchError(()=>{return of({})}),tap(
       (matchEquipe)=>{
+        console.log(matchEquipe)
         if(matchEquipe){
-          if(matchEquipe[id]){
             this.matchEquipesProvide.next(matchEquipe)
-          }
         }
      
-        this.http.get(`/match_equipes/${id}`).pipe(catchError(()=>{return of(matchEquipe['matchEquipe'])})).subscribe(
+        this.http.get(`/match_equipes/${id}`).pipe(catchError((err)=>{console.log(err,matchEquipe); return of(matchEquipe['matchEquipe'])})).subscribe(
           (e)=>{
-            if(matchEquipe){
-              if(matchEquipe['matchEquipe']!=e){
-                this.matchEquipesProvide.next({id:id,matchEquipes:e});
+            if(e){
+              if(matchEquipe){
+                if(matchEquipe['matchEquipe']!=e){
+                  this.matchEquipesProvide.next({id:id,matchEquipe:e});
+                  this.http.post('api/matchEquipes',{id,matchEquipe:e}).subscribe((e)=>{
+                    
+                  })
+                  
+                }
+              }else{
+                this.matchEquipesProvide.next({id:id,matchEquipe:e});
                 this.http.post('api/matchEquipes',{id,matchEquipe:matchEquipe}).subscribe()
-                
               }
             }else{
-              this.matchEquipesProvide.next({id:id,matchEquipes:e});
-              this.http.post('api/matchEquipes',{id,matchEquipe:matchEquipe}).subscribe()
+
             }
-    
-          }
+            
+          
+          },
+          (err)=>{console.log(err)}
         );
        
     

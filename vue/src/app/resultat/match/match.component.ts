@@ -22,7 +22,9 @@ export class MatchComponent implements OnInit {
       if(e['id']!=this.idmacht){
         return false
       }
-      e = e['matchEquipes']
+  
+      e = e['matchEquipe']
+      if(e)
       if(e['status']){
         let t =[]
         t = e['message']
@@ -35,5 +37,5 @@ export class MatchComponent implements OnInit {
     })
     this.comp.get_equipes_match(this.idmacht)
   }
-
+ 
 }

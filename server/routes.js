@@ -53,6 +53,7 @@ module.exports = function(app){
 
     var equipe = require('./controllers/equipe');
     app.get('/equipe', equipe.findAll);
+    app.get('/stats/equipe/:id', equipe.stat);
     app.get('/equipe/:id', equipe.findById);
     app.post('/equipe', equipe.add);
     app.put('/equipe/:id', equipe.update);

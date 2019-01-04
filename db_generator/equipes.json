@@ -1,0 +1,16 @@
+{"_id":{"$oid":"5c2b3c488806cb2324fe474b"},"joueurs":[],"nom":"afrique-du-sud","banniere":"afrique-du-sud_1546337351939.png","tournois":{"$oid":"5c2b3be38806cb2324fe4747"},"__v":0}
+{"_id":{"$oid":"5c2b3f398806cb2324fe474c"},"joueurs":[],"nom":"algerie","banniere":"algerie_1546338105481.png","tournois":{"$oid":"5c2b3be38806cb2324fe4747"},"__v":0}
+{"_id":{"$oid":"5c2b3f588806cb2324fe474d"},"joueurs":[],"nom":"angola","banniere":"angola_1546338136835.png","tournois":{"$oid":"5c2b3be38806cb2324fe4747"},"__v":0}
+{"_id":{"$oid":"5c2b3f808806cb2324fe474e"},"joueurs":[],"nom":"benin","banniere":"benin_1546338176835.png","tournois":{"$oid":"5c2b3be38806cb2324fe4747"},"__v":0}
+{"_id":{"$oid":"5c2b3fab8806cb2324fe474f"},"joueurs":[],"nom":"botswana","banniere":"botswana_1546338219386.png","tournois":{"$oid":"5c2b3be38806cb2324fe4747"},"__v":0}
+{"_id":{"$oid":"5c2b3fcd8806cb2324fe4750"},"joueurs":[],"nom":"cameroun","banniere":"cameroun_1546338253166.png","tournois":{"$oid":"5c2b3be38806cb2324fe4747"},"__v":0}
+{"_id":{"$oid":"5c2b3feb8806cb2324fe4751"},"joueurs":[],"nom":"cap-vert","banniere":"cap-vert_1546338282859.png","tournois":{"$oid":"5c2b3be38806cb2324fe4747"},"__v":0}
+{"_id":{"$oid":"5c2b3fff8806cb2324fe4752"},"joueurs":[],"nom":"congo","banniere":"congo_1546338300974.png","tournois":{"$oid":"5c2b3be38806cb2324fe4747"},"__v":0}
+{"_id":{"$oid":"5c2b40318806cb2324fe4753"},"joueurs":[],"nom":"cote-ivoir","banniere":"cote-ivoire_1546338353647.png","tournois":{"$oid":"5c2b3be38806cb2324fe4747"},"__v":0}
+{"_id":{"$oid":"5c2b40528806cb2324fe4754"},"joueurs":[],"nom":"egypte","banniere":"egypte_1546338386859.png","tournois":{"$oid":"5c2b3be38806cb2324fe4747"},"__v":0}
+{"_id":{"$oid":"5c2b40758806cb2324fe4755"},"joueurs":[],"nom":"ghana","banniere":"ghana_1546338421095.png","tournois":{"$oid":"5c2b3be38806cb2324fe4747"},"__v":0}
+{"_id":{"$oid":"5c2b40948806cb2324fe4756"},"joueurs":[],"nom":"guinee","banniere":"guinee_1546338452573.png","tournois":{"$oid":"5c2b3be38806cb2324fe4747"},"__v":0}
+{"_id":{"$oid":"5c2b40bf8806cb2324fe4757"},"joueurs":[],"nom":"keyna","banniere":"kenya_1546338493622.png","tournois":{"$oid":"5c2b3be38806cb2324fe4747"},"__v":0}
+{"_id":{"$oid":"5c2b40ea8806cb2324fe4758"},"joueurs":[],"nom":"maroc","banniere":"maroc_1546338538588.png","tournois":{"$oid":"5c2b3be38806cb2324fe4747"},"__v":0}
+{"_id":{"$oid":"5c2b410b8806cb2324fe4759"},"joueurs":[],"nom":"senegale","banniere":"senegal_1546338570594.png","tournois":{"$oid":"5c2b3be38806cb2324fe4747"},"__v":0}
+{"_id":{"$oid":"5c2b41298806cb2324fe475a"},"joueurs":[],"nom":"tunisie","banniere":"tunisie_1546338600533.png","tournois":{"$oid":"5c2b3be38806cb2324fe4747"},"__v":0}

@@ -30,7 +30,8 @@ const PROXY_CONFIG = [
           "/poule",
           "/poule_all",
           "/match_equipes",
-          "/default"
+          "/default",
+          "/stats"
       ],
       target: "http://localhost:3000",
       secure: false,
